@@ -1,0 +1,28 @@
+.form-control {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    padding: 21px 19px;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color:#DDDDDD;
+}
+
+.form-control::placeholder {
+    font-size: 14px;
+    color: #C7CCCE;
+}
+
+.auth-form .form-element,
+.add-device-form .form-element {
+    margin-bottom: 30px;
+}
+
+.form-alert {
+    text-align: left;
+    color: #dc3545;
+    font-size: 12px;
+}

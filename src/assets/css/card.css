@@ -1,0 +1,18 @@
+.card {
+    border: 0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #e4f0f6;
+    color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.card.news-card:hover {
+    background-color: #a1c4d6;
+}
+
+.media-wrapper img {
+    width: 200px;
+    height: 100px;
+}

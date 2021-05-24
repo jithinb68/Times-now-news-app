@@ -1,0 +1,33 @@
+.page-body-wrapper {
+    display: flex;
+}
+
+.main-panel {
+    width: calc(100% - 282px);
+    min-height: 100vh;
+}
+
+@media(max-width: 1000px) {
+    .main-panel {
+        width: calc(100% - 220px);
+        min-height: 100vh;
+    }
+}
+
+.content-wrapper {
+    color: #000000;
+    padding: 36px 59px;
+    height: calc(100vh - 70px);
+    overflow-y: scroll;
+    
+}
+
+.content-wrapper .containerss {
+    min-height: calc(100vh - 72px);
+}
+
+@media(max-width: 1000px) {
+    .content-wrapper {
+        padding: 18px 30px;
+    }
+}

@@ -1,0 +1,20 @@
+/* Common styles */
+
+/* UI elements styles */
+@import "button.css";
+@import "card.css"; 
+@import "forms.css"; 
+@import "font.css"; 
+@import "font.css"; 
+@import "loader.css";
+@import "typography.css"; 
+
+@import "layout.css"; 
+@import "error.css"; 
+@import "common.css"; 
+@import "utilities.css"; 
+
+/* Component styles */
+@import "sidebar.css";
+@import "navbar.css";
+@import "login.css";
