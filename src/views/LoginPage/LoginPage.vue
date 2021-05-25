@@ -26,6 +26,7 @@
                   >
                 </BaseInput>
                 <div v-show="isPasswordEmpty" class="form-alert">Password is required</div>
+                <div v-if="isNotValidPassword" class="form-alert">Password must be below 20 chars and should not contain special charecters</div>
               </div>
               <div v-show="isInvalidCred" class="form-alert text-center mb-3">Wrong username or password</div>
               <div class="mb-2">Don't have an account ? <a class="text-info" @click="$router.push('/signup')"> Signup</a></div> 
@@ -47,6 +48,7 @@
         password: "",
         isEmailEmpty: false,
         isPasswordEmpty: false,
+        isNotValidPassword: false,
         isNotValidEmail: false,
         isInvalidCred: false,
         storedEmail: '',
@@ -66,6 +68,7 @@
             this.isEmailEmpty = false;
             this.isNotValidEmail = false;
             this.isPasswordEmpty = false;
+            this.isNotValidPassword = false;
             this.isInvalidCred =  false;
 
             // email empty check and valid email check
@@ -78,16 +81,27 @@
             // password empty check
             if(!this.password) {
               this.isPasswordEmpty = true;
+            } else if(this.password.length > 20 || this.containsSpecialChars(this.password)) {
+              this.isNotValidPassword =  true;
             }
 
             // if all condition passed
             if (!this.isEmailEmpty && !this.isNotValidEmail && !this.isPasswordEmpty) {
-              if(this.storedEmail === this.email && this.storedPassword === this.password) this.$router.push('/home');
+              if(this.storedEmail === this.email && this.storedPassword === this.password) {
+                  this.$router.push('/home');
+              } else {
+                this.isInvalidCred = true;
+              }
             }
         },
         validEmail(email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
+        },
+        containsSpecialChars(text) {
+            //eslint-disable-next-line
+            var regex = /[^a-zA-Z0-9]/
+            return regex.test(text);
         }
     }
   }

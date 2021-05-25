@@ -6,6 +6,8 @@
             <li v-for="(feed, index) in filteredNewsFeeds" :key="index">
                 <NewsFeed :feed="feed" :index="index" :thumbnailPresent="true"/>
             </li>
+            <!-- I was not able to complete the pagination part due to lack of time. -->
+            <!-- <Pagination/> -->
         </ul>
         <NoResults info="No results found for this filter. Try changing the filter" :showResetButton="true" v-else/>
     </div>
@@ -17,13 +19,15 @@ import NewsFeed from "@/components/NewsFeed/NewsFeed";
 import Loader from "@/components/Loader/Loader";
 import NoResults from "@/components/NoResults/NoResults";
 import PageHeader from "@/components/PageHeader/PageHeader";
+// import Pagination from "@/components/Pagination/Pagination";
 
 export default {
     components: {
         NewsFeed,
         Loader,
         NoResults,
-        PageHeader
+        PageHeader,
+        // Pagination
     },
     computed: {
         ...mapState(['filteredNewsFeeds', 'isFeedLoading', 'filterParam'])
@@ -41,7 +45,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

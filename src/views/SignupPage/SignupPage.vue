@@ -16,7 +16,7 @@
                 >
                 </BaseInput>
                 <div v-if="isNameEmpty" class="form-alert">Name is required</div>
-                <div v-if="isNotValidName" class="form-alert">Name is not valid</div>
+                <div v-if="isNotValidName" class="form-alert">Name is not valid. It should not contain special chars</div>
               </div>
               <div class="form-element">
                 <BaseInput 
@@ -36,7 +36,7 @@
                   >
                 </BaseInput>
                 <div v-if="isPasswordEmpty" class="form-alert">Password is required</div>
-                <div v-if="isNotValidPassword" class="form-alert">Password must not be greater than 20 chars and should not contain special charecters</div>
+                <div v-if="isNotValidPassword" class="form-alert">Password must be below 20 chars and should not contain special charecters</div>
               </div>
               <div v-if="isInvalidCred" class="form-alert text-center mb-3">Wrong username or password</div>
               <div class="mb-2">Already have an account ? <a class="text-info" @click="$router.push('/login')"> Login</a></div> 
@@ -94,15 +94,17 @@
             // password empty check
             if(!this.password) {
               this.isPasswordEmpty = true;
-            } else if(this.password.length > 20) {
+            } else if(this.password.length > 20 || this.containsSpecialChars(this.password)) {
               this.isNotValidPassword =  true;
             }
-
+            
             if(!this.name) {
               this.isNameEmpty = true;
+            } else if(this.containsSpecialChars(this.name)) {
+              this.isNotValidName =  true;
             }
 
-            if (!this.isEmailEmpty && !this.isNotValidEmail && !this.isPasswordEmpty && !this.isNotValidPassword && !this.isNameEmpty) {
+            if (!this.isEmailEmpty && !this.isNotValidEmail && !this.isPasswordEmpty && !this.isNotValidPassword && !this.isNameEmpty && !this.isNotValidName) {
               localStorage.setItem("name", this.name);
               localStorage.setItem("email", this.email);
               localStorage.setItem("password", this.password);
@@ -114,10 +116,11 @@
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
         },
-        // containsSpecialChars(text) {
-        //     const re = /^[A-Za-z0-9\!\@\#\$\%\^\&\*\)\(+\=\._-]+$/g
-        //     return re.test(text);
-        // }
+        containsSpecialChars(text) {
+            //eslint-disable-next-line
+            var regex = /[^a-zA-Z0-9]/
+            return regex.test(text);
+        }
     }
   }
 </script>
