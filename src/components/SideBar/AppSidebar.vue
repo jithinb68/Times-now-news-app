@@ -14,15 +14,13 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import SectionList from "@/components/SideBar/SectionList";
-  import axios from 'axios'
 
   export default {
     name: "app-sidebar",
-    data() {
-      return {
-        sectionLists: []
-      }
+    computed: {
+        ...mapState(['sectionLists'])
     },
     components: {
       SectionList
@@ -33,13 +31,7 @@
     },
     methods: {
       getSectionList() {
-          axios({url: 'https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=uR1j3A82i48Cvvn6A4pQRWBCIhUCIvG7', method: 'GET' })
-          .then(resp => {
-            this.sectionLists =  resp.data.results;
-          })
-          .catch(err => {
-            console.log(err);
-          })
+          !this.sectionLists.length && this.$store.dispatch('getSectionList');
       }
     }
   }

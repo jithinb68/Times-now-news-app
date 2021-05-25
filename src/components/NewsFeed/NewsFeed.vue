@@ -10,7 +10,7 @@
                     <a>Read Later</a>
                 </div>
             </b-col>
-            <b-col cols="3" v-if="feed.multimedia && feed.multimedia.length" @click.prevent='click'>
+            <b-col cols="3" v-if="feed.multimedia && feed.multimedia.length && thumbnailPresent" @click.prevent='click'>
                 <VueSlickCarousel :arrows="false" :dots="false" :autoplay="true">
                     <div v-for="(media, index) in feed.multimedia" :key="index" class="media-wrapper">
                         <img :src="media.url ? media.url : 'https://via.placeholder.com/150'" :alt="media.caption">
@@ -29,7 +29,8 @@ export default {
     name: "section-list",
     props: {
         feed: Object,
-        index: Number
+        index: Number,
+        thumbnailPresent: Boolean
     },
     components: {
         VueSlickCarousel
@@ -39,7 +40,6 @@ export default {
             window.open(url, '_blank').focus();
         },
         toggleReadLater(feed, index) {
-            console.log(this.$route.name);
             this.$store.dispatch('toggleReadLater', {feed, index});
         }
     }

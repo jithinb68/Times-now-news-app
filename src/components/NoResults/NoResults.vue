@@ -1,10 +1,10 @@
 <template>
     <div class="d-flex flex-column justify-content-center align-items-center my-5">
         <div class="text-center">
-                <b-icon icon="emoji-frown" style="width: 40px; height: 40px;"></b-icon>
+            <b-icon icon="emoji-frown" style="width: 40px; height: 40px;"></b-icon>
         </div>
         <h6 class="text-center mt-3">Sorry! {{ info }}</h6>
-        <b-button @click="resetNewsFeedFilter()">Reset Filter</b-button>
+        <b-button @click="resetNewsFeedFilter()" v-if="showResetButton">Reset Filter</b-button>
     </div>
 </template>
 
@@ -13,7 +13,8 @@
 
 export default {
     props: {
-        info: String
+        info: String,
+        showResetButton: Boolean
     },
     methods: {
         resetNewsFeedFilter() {

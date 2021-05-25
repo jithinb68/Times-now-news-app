@@ -27,11 +27,7 @@
 export default {
     methods: {
         logout() {
-            localStorage.removeItem("name");
-            localStorage.removeItem("email");
-            localStorage.removeItem("password");
-            setTimeout(() => this.$router.push('/login'), 1000)
-            // this.$router.push('/login');
+            this.$router.push('/login');
         }
     }
 }

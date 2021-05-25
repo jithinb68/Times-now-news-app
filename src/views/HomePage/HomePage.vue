@@ -1,13 +1,13 @@
 <template>
     <Loader v-if="isFeedLoading"/>
     <div v-else>
-        <PageHeader title="News Feed"/>
+        <PageHeader title="News Feed" :showFilterParam="true"/>
         <ul v-if="filteredNewsFeeds.length">
             <li v-for="(feed, index) in filteredNewsFeeds" :key="index">
-                <NewsFeed :feed="feed" :index="index"/>
+                <NewsFeed :feed="feed" :index="index" :thumbnailPresent="true"/>
             </li>
         </ul>
-        <NoResults info="No results found for this filter. Try changing the filter" v-else/>
+        <NoResults info="No results found for this filter. Try changing the filter" :showResetButton="true" v-else/>
     </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         getNewsFeed() {
-            this.$store.dispatch('getNewsFeed');
+            !this.filteredNewsFeeds.length &&  !this.filterParam && this.$store.dispatch('getNewsFeed');
         },
         resetNewsFeedFilter() {
             this.$store.dispatch('resetFilter');

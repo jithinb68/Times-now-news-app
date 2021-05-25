@@ -1,32 +1,31 @@
 <template>
     <b-card>
-        <h4>Profile Details</h4>
+        <div class="d-flex justify-content-between">
+            <h4>Profile Details</h4>
+            <b-button @click="$router.push('/home')">Back to Home</b-button>
+        </div>
         <ul class="profile-details">
-            <li>
-                <span class="label">Name</span>
-                <span class="value">{{ profileDetails.name }}</span>
-            </li>
-            <li>
-                <span class="label">Email</span>
-                <span class="value">{{ profileDetails.email }}</span>
-            </li>
-            <li>
-                <span class="label">Password</span>
-                <span class="value">{{ profileDetails.password }}</span>
-            </li>
+            <DetailRow label="Name" keyName="name" :allowEdit="true"/>
+            <DetailRow label="Email" keyName="email" :allowEdit="false"/>
+            <DetailRow label="Password" keyName="password" :allowEdit="true"/>
+            <b-button @click="deleteAccount()">Delete Account</b-button>
         </ul>
     </b-card>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import DetailRow from "@/components/DetailRow/DetailRow";
 
 export default {
-    props: {
-        title: String
+    components: {
+        DetailRow
     },
-    computed: {
-        ...mapState(['profileDetails'])
-    },
+    methods: {
+        deleteAccount() {
+            this.$store.dispatch('removeProfileDetails');
+            localStorage.clear();
+            this.$router.push('/login');
+        }
+    }
 }
 </script>
